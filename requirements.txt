@@ -1,0 +1,12 @@
+flask
+flask-Script
+flask-WTF
+flask-HTTPAuth
+flask-Login
+flask-SQLAlchemy
+flask-Migrate
+flask-Mail
+flask-Moment
+flask-SSLify
+flask-excel
+flask-assets
