@@ -42,7 +42,10 @@ class DevelopmentConfig(Config):
 class ProductConfig(Config):
     """生产环境配置"""
     DEBUG = False
-
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
+                              'mysql://{0}:{1}@{2}:3306/{3}?charset=utf8'.format(Config.DB_USER, Config.DB_PASSWD,
+                                                                                 Config.DB_HOST, Config.DB_NAME)
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     @classmethod
     def init_app(cls, app):
         Config.init_app(app)

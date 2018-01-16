@@ -10,3 +10,6 @@ flask-Moment
 flask-SSLify
 flask-excel
 flask-assets
+Flask-Gravatar
+urllib
+hashlib
