@@ -10,6 +10,7 @@ from flask_migrate import Migrate, MigrateCommand
 from lssd.auth.models import User, Role
 
 app = create_app('default')
+print app
 manager = Manager(app)
 migrate = Migrate(app, db)
 
