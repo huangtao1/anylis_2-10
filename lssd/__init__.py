@@ -3,12 +3,10 @@
 # Created by mark.huang on 2018/1/15.
 
 from flask import Flask
-from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
 from flask_mail import Mail
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from flask_migrate import Migrate
 from config import config
 
 mail = Mail()
@@ -27,6 +25,7 @@ def create_app(config_name):
     mail.init_app(app)
     moment.init_app(app)
     db.init_app(app)
+    login_manager.init_app(app)
     from lssd.main import main as main_blueprint
     app.register_blueprint(main_blueprint)
     from lssd.auth import auth as auth_blueprint
