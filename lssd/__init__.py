@@ -9,7 +9,7 @@ from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from config import Config
+from config import config
 
 mail = Mail()
 moment = Moment()
@@ -21,8 +21,8 @@ login_manager.login_view = 'auth.login'
 
 def create_app(config_name):
     app = Flask(__name__)
-    app.config.from_object(Config.config_name)
-    Config.config_name.init_app(app)
+    app.config.from_object(config[config_name])
+    config[config_name].init_app(app)
 
     mail.init_app(app)
     moment.init_app(app)
@@ -31,3 +31,4 @@ def create_app(config_name):
     app.register_blueprint(main_blueprint)
     from lssd.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
+
