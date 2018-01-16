@@ -7,7 +7,7 @@ import hashlib
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask.ext.login import UserMixin, AnonymousUserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from flask import current_app
 from lssd import db, login_manager
 
