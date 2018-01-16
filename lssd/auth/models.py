@@ -9,9 +9,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.login import UserMixin, AnonymousUserMixin
 from flask import current_app
-
-from tms.exceptions import ValidationError
-from tms import db, login_manager
+from lssd import db, login_manager
 
 class Role(db.Model):
     """角色"""
