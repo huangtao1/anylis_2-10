@@ -4,11 +4,11 @@
 
 from flask import Flask
 from flask.sessions import SecureCookieSession, SecureCookieSessionInterface
-from flask.ext.mail import Mail
-from flask.ext.moment import Moment
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.login import LoginManager
-from flask.ext.migrate import Migrate
+from flask_mail import Mail
+from flask_moment import Moment
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+from flask_migrate import Migrate
 from config import Config
 
 mail = Mail()
