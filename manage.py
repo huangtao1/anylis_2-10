@@ -21,25 +21,5 @@ def make_shell_context():
 manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 
-
-@manager.command
-def profile(length=25, profile_dir=None):
-    """
-    Start the application under the code profiler.
-    在代码分析器中运行应用
-    """
-    from werkzeug.contrib.profiler import ProfilerMiddleware
-    app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[length], profile_dir=profile_dir)
-    app.run()
-
-
-@manager.command
-def deploy():
-    """执行部署任务"""
-    from flask.ext.migrate import upgrade
-
-    upgrade()
-
-
 if __name__ == '__main__':
     manager.run()
