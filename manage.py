@@ -9,7 +9,7 @@ from flask_script import Manager, Shell
 from flask_migrate import Migrate, MigrateCommand
 from lssd.auth.models import User, Role
 
-app = create_app(os.getenv('tms') or 'default')
+app = create_app('default')
 manager = Manager(app)
 migrate = Migrate(app, db)
 
