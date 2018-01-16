@@ -3,22 +3,22 @@
 	<head>
 		<!-- Meta -->
 		<meta charset="utf-8">
-		<title>Mapplic - Custom Interactive Map Plugin - USA Example</title>
+		<title>Mapplic - Custom Interactive Map Plugin - US States Example</title>
 
 		<!-- Viewport for Responsivity -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-		<meta name="description" content="Vector United States map with clickable states and pins, an example of using Mapplic, a premium custom interactive map plugin to display custom image or vector (SVG) maps.">
+		<meta name="description" content="Vector Frace map with clickable states and pins, an example of using Mapplic, a premium custom interactive map plugin to display custom image or vector (SVG) maps.">
 
 		<!-- Stylesheets -->
 		<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="css/map.css">
 		<link rel="stylesheet" type="text/css" href="mapplic/mapplic.css">
 		<!-- Internet Explorer -->
 		<!--[if lt IE 9]>
-			<link rel="stylesheet" type="text/css" href="mapplic/mapplic-ie.css">
-			<script type="text/javascript" src="js/html5shiv.js"></script>
-		<![endif]-->
+        <link rel="stylesheet" type="text/css" href="mapplic/mapplic-ie.css">
+        <script type="text/javascript" src="js/html5shiv.js"></script>
+        <![endif]-->
 	</head>
 	<body>
 		<div id="wrap">
@@ -44,7 +44,7 @@
 
 			<!-- Site content -->
 			<div id="content">
-				
+
 				<section id="map-section" class="inner over">
 					<div class="editor-window">
 						<div class="window-mockup brown"></div>
@@ -76,10 +76,10 @@
 						<li><a href="world.html">World</a></li>
 						<li><a href="continents.html">Continents</a></li>
 						<li><a href="europe.html">Europe</a></li>
-						<li class="active"><a href="usa.html">USA</a></li>
+						<li><a href="usa.html">USA</a></li>
 						<li><a href="canada.html">Canada</a></li>
 						<li><a href="australia.html">Australia</a></li>
-						<li><a href="france.html">France</a></li>
+						<li class="active"><a href="france.html">France</a></li>
 						<li><a href="germany.html">Germany</a></li>
 						<li><a href="italy.html">Italy</a></li>
 						<li><a href="uk.html">United Kingdom</a></li>
@@ -155,8 +155,9 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#mapplic').mapplic({
-					source: 'usa.json',
-					height: 494,
+					source: 'france.json',
+					height: 420,
+					animate: false,
 					sidebar: false,
 					minimap: true,
 					locations: true,
@@ -164,7 +165,8 @@
 					fullscreen: false,
 					hovertip: true,
 					developer: true,
-					maxscale: 3
+					maxscale: 2,
+					zoom: true
 				});
 
 				$('.usage').click(function(e) {

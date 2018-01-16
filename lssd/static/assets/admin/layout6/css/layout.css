@@ -887,7 +887,7 @@ Quick Sidebar Content
 ----------------------------------------------------*/
 /* Body */
 body {
-  background: #2f373e url(../../../../assets/admin/layout6/img/bg_01.jpg) no-repeat;
+  background: #2f373e url(../img/bg_01.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;

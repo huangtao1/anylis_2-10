@@ -3,11 +3,11 @@
 	<head>
 		<!-- Meta -->
 		<meta charset="utf-8">
-		<title>Mapplic - Custom Interactive Map Plugin - World Map Example</title>
+		<title>Mapplic - Custom Interactive Map Plugin - Continents Example</title>
 
 		<!-- Viewport for Responsivity -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-		<meta name="description" content="Vector World map with clickable states and pins, an example of using Mapplic, a premium custom interactive map plugin to display custom image or vector (SVG) maps.">
+		<meta name="description" content="Vector World map with clickable continents and pins, an example of using Mapplic, a premium custom interactive map plugin to display custom image or vector (SVG) maps.">
 
 		<!-- Stylesheets -->
 		<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,700' rel='stylesheet' type='text/css'>
@@ -16,9 +16,9 @@
 		<link rel="stylesheet" type="text/css" href="mapplic/mapplic.css">
 		<!-- Internet Explorer -->
 		<!--[if lt IE 9]>
-			<link rel="stylesheet" type="text/css" href="mapplic/mapplic-ie.css">
-			<script type="text/javascript" src="js/html5shiv.js"></script>
-		<![endif]-->
+        <link rel="stylesheet" type="text/css" href="mapplic/mapplic-ie.css">
+        <script type="text/javascript" src="js/html5shiv.js"></script>
+        <![endif]-->
 	</head>
 	<body>
 		<div id="wrap">
@@ -73,8 +73,8 @@
 					<ul id="examples">
 						<li><a href="./">Mall Map</a></li>
 						<li><a href="apartment.html">Apartment</a></li>
-						<li class="active"><a href="world.html">World</a></li>
-						<li><a href="continents.html">Continents</a></li>
+						<li><a href="world.html">World</a></li>
+						<li class="active"><a href="continents.html">Continents</a></li>
 						<li><a href="europe.html">Europe</a></li>
 						<li><a href="usa.html">USA</a></li>
 						<li><a href="canada.html">Canada</a></li>
@@ -155,18 +155,19 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#mapplic').mapplic({
-					source: 'world.json',
+					source: 'continents.json',
 					height: 460,
 					animate: false,
 					sidebar: false,
 					minimap: false,
+					locations: true,
+					zoombuttons: false,
 					deeplinking: true,
 					fullscreen: false,
 					hovertip: true,
 					developer: true,
-					maxscale: 2,
-					skin: 'mapplic-dark',
-					zoom: true
+					maxscale: 4,
+					zoom: false
 				});
 
 				$('.usage').click(function(e) {
