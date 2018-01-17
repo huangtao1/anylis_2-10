@@ -6,4 +6,8 @@ from flask import render_template, redirect, url_for, request, current_app
 
 @auth.route('login',methods=['GET','POST'])
 def login():
+    """
+
+    :return:
+    """
     return render_template('auth/login.html')
