@@ -11,5 +11,5 @@ flask-SSLify
 flask-excel
 flask-assets
 Flask-Gravatar
-urllib
+urllib3
 hashlib
