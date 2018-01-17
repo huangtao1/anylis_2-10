@@ -48,7 +48,6 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime(), default=datetime.now())
     activate = db.Column(db.Boolean, default=True)
     real_avatar =db.Column(db.String(128))
-    gitoite_policy = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<User %r>' % self.username
