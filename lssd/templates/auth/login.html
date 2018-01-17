@@ -10,8 +10,6 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta content="" name="description"/>
     <meta content="" name="author"/>
-    <meta name="google-signin-client_id"
-          content="411380160199-18e3e05ajsh5ftangnij2edhs26nvg73.apps.googleusercontent.com">
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
           type="text/css"/>
@@ -90,7 +88,24 @@
         </div>
         <div class="login-options">
             <h4>Or login with</h4>
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <ul class="social-icons">
+                <li>
+                    <a class="facebook" data-original-title="facebook" href="javascript:;">
+                    </a>
+                </li>
+                <li>
+                    <a class="twitter" data-original-title="Twitter" href="javascript:;">
+                    </a>
+                </li>
+                <li>
+                    <a class="googleplus" data-original-title="Goole Plus" href="javascript:;">
+                    </a>
+                </li>
+                <li>
+                    <a class="linkedin" data-original-title="Linkedin" href="javascript:;">
+                    </a>
+                </li>
+            </ul>
         </div>
     </form>
     <!-- END LOGIN FORM -->
@@ -127,8 +142,6 @@
 <script src="{{ url_for('static', filename='assets/admin/layout/scripts/demo.js') }}" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='assets/admin/pages/scripts/login-soft.js') }}"
         type="text/javascript"></script>
-
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
     jQuery(document).ready(function () {
         Metronic.init(); // init metronic core components
