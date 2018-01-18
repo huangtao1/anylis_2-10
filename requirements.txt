@@ -13,3 +13,5 @@ flask-assets
 Flask-Gravatar
 urllib3
 hashlib
+bs4
+requests
