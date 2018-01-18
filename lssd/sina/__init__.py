@@ -3,5 +3,5 @@
 # Created by mark.huang on 2018/1/17.
 from flask import Blueprint
 
-hupu = Blueprint('hupu',__name__)
+sina = Blueprint('sina',__name__)
 from . import views

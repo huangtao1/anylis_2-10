@@ -20,7 +20,8 @@ class Config:
     DB_HOST = os.environ.get('LSSD_DB_HOST')
     DB_USER = os.environ.get('LSSD_DB_USER')
     DB_PASSWD = os.environ.get('LSSD_DB_PASSWD')
-
+    # 球队数据
+    NBA_TEAM_INFO = {''}
     @staticmethod
     def init_app(app):
         pass

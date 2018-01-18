@@ -29,7 +29,11 @@ def create_app(config_name):
     login_manager.init_app(app)
     from lssd.main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+    #登录认证
     from lssd.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint,url_prefix='/auth')
+    #新浪NBA
+    from lssd.sina import sina as sina_blueprint
+    app.register_blueprint(sina_blueprint,url_prefix='/sina')
     return app
 
