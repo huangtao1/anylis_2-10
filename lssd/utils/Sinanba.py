@@ -4,11 +4,12 @@
 from bs4 import BeautifulSoup
 import requests
 import sys
+from datetime import datetime
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-@staticmethod
+
 def get_nba_data(year, month, day):
     header = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
@@ -46,10 +47,25 @@ def get_nba_data(year, month, day):
                 second_name = td.get_text()
             if td.b:
                 second_score = td.b.get_text()
-        match = {'match': first_name + ':' + second_name, 'score': first_score + ':' + second_score}
+        match = {'match': first_name + ':' + second_name,
+                 'score': first_score + ':' + second_score}
         all_match_infos.append(match)
     return all_match_infos
 
 
+def exchange_nba_data():
+    year = '2018'
+    month = '01'
+    day = '18'
+    all_info = get_nba_data(year, month, day)
+    # 将all_info转换为对应的语句
+    broadcast_str = u'今天是{0}年{1}月{2}日,现在开始播报今天的比分。'.format(year, month, day)
+    for match_info in all_info:
+        broadcast_str += match_info.get('match').split(':')[0] + '对阵' + match_info.get('match').split(':')[1] + \
+                         match_info.get('score').split(':')[0] + '比' + \
+                         match_info.get('score').split(':')[1] + '。'
+    print broadcast_str
+
+
 if __name__ == '__main__':
-    print get_nba_data()
+    exchange_nba_data()
