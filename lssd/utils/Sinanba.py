@@ -5,6 +5,9 @@ from bs4 import BeautifulSoup
 import requests
 import sys
 from datetime import datetime
+from aip import AipSpeech
+# from config import Config
+import os
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -54,17 +57,38 @@ def get_nba_data(year, month, day):
 
 
 def exchange_nba_data():
-    year = '2018'
-    month = '01'
-    day = '18'
+    year = str(datetime.now().year)
+    month = str(datetime.now().month) if datetime.now().month >= 10 else '0' + str(datetime.now().month)
+    day = str(datetime.now().day) if datetime.now().day >= 10 else '0' + str(datetime.now().day)
+
     all_info = get_nba_data(year, month, day)
     # 将all_info转换为对应的语句
-    broadcast_str = u'今天是{0}年{1}月{2}日,现在开始播报今天的比分。'.format(year, month, day)
+    broadcast_str = u'今天是{0}年{1}月{2}日,现在开始播报今天的比赛。'.format(year, month, day)
     for match_info in all_info:
-        broadcast_str += match_info.get('match').split(':')[0] + '对阵' + match_info.get('match').split(':')[1] + \
-                         match_info.get('score').split(':')[0] + '比' + \
-                         match_info.get('score').split(':')[1] + '。'
+        if match_info.get('score').split(':')[0]:
+            broadcast_str += match_info.get('match').split(':')[0] + '对阵' + match_info.get('match').split(':')[1] + \
+                             match_info.get('score').split(':')[0] + '比' + \
+                             match_info.get('score').split(':')[1] + '。'
+        else:
+            broadcast_str += match_info.get('match').split(':')[0] + '对阵' + match_info.get('match').split(':')[
+                1] + '尚未开始。'
+
     print broadcast_str
+    APP_ID = '10715605'
+    API_KEY = '9TpqA6aHGWgxagFFzudebhIj'
+    SECRET_KEY = 'spGFcwNwk2OasbGf916idGFA1iQOcQhf'
+
+    client = AipSpeech(APP_ID, API_KEY, SECRET_KEY)
+    result = client.synthesis(broadcast_str, 'zh', 1, {
+        'vol': 5,
+    })
+
+    # 识别正确返回语音二进制 错误则返回dict 参照下面错误码
+    # mp3存储地址
+    MP3_path = ''
+    if not isinstance(result, dict):
+        with open('auido.mp3', 'wb') as f:
+            f.write(result)
 
 
 if __name__ == '__main__':

@@ -22,6 +22,8 @@ class Config:
     DB_PASSWD = os.environ.get('LSSD_DB_PASSWD')
     # 球队数据
     NBA_TEAM_INFO = {''}
+    # 每日比分存放目录
+    NBA_SCORE_MP3=os.path.join(basedir,'lssd_resource/NBA/MP3')
     @staticmethod
     def init_app(app):
         pass

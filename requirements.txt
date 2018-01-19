@@ -16,3 +16,4 @@ hashlib
 bs4
 requests
 pymysql
+baidu-aip
