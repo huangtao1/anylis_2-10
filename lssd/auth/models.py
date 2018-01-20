@@ -30,7 +30,7 @@ class Role(db.Model):
         return getattr(self, item)
 
 
-class User(UserMixin, db.Model):
+class User(db.Model):
     """用户"""
 
     __tablename__ = 'lssd_user'

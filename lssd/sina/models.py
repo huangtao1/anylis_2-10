@@ -4,7 +4,7 @@
 from lssd import db
 
 
-class Nbadaily(db.model):
+class Nbadaily(db.Model):
     """
     每天nba比赛结果存储
     """
@@ -13,14 +13,14 @@ class Nbadaily(db.model):
     master_team = db.Column(db.String(64))
     visit_team = db.Column(db.String(64))
     master_score = db.Column(db.String(64))
-    visit_score = db.Column(db.string(64))
+    visit_score = db.Column(db.String(64))
     competing_time = db.Column(db.Date)
 
     def __repr__(self):
         return 'NBADaily_report:{0}'.format(self.competing_time)
 
 
-class Dailysound(db.model):
+class Dailysound(db.Model):
     """
     每天nba结果转换成mp3存放的地址
     """
@@ -33,7 +33,7 @@ class Dailysound(db.model):
         return 'NBADaily_mp3:{0}'.format(self.competing_time)
 
 
-class Dailynews(db.model):
+class Dailynews(db.Model):
     """
     每天的NBA头条新闻
     """
