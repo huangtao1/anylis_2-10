@@ -9,7 +9,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from lssd import db
 
 
-@auth.route('login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     """
     登录模块
@@ -28,7 +28,7 @@ def login():
     return render_template('auth/login.html')
 
 
-@auth.route('add_user', methods=['GET', 'POST'])
+@auth.route('/add_user', methods=['GET', 'POST'])
 @login_required
 def add_user():
     """
