@@ -19,20 +19,6 @@ class Nbadaily(db.Model):
     def __repr__(self):
         return 'NBADaily_report:{0}'.format(self.competing_time)
 
-
-class Dailysound(db.Model):
-    """
-    每天nba结果转换成mp3存放的地址
-    """
-    __tablename__ = 'lssd_hupudaily_mp3'
-    id = db.Column(db.Integer, primary_key=True)
-    daily_mp3_path = db.Column(db.Text)
-    competing_time = db.Column(db.Date)
-
-    def __repr__(self):
-        return 'NBADaily_mp3:{0}'.format(self.competing_time)
-
-
 class Dailynews(db.Model):
     """
     每天的NBA头条新闻

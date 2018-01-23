@@ -23,7 +23,7 @@ class Config:
     # 球队数据
     NBA_TEAM_INFO = {''}
     # 每日比分存放目录
-    NBA_SCORE_MP3=os.path.join(basedir,'lssd_resource/NBA/MP3')
+    NBA_SCORE_MP3=os.path.join(basedir,'static/NBA')
     @staticmethod
     def init_app(app):
         pass

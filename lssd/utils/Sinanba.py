@@ -6,8 +6,9 @@ import requests
 import sys
 from datetime import datetime
 from aip import AipSpeech
-# from config import Config
+from config import Config
 import os
+from Mydb import Mydb
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -24,16 +25,12 @@ def get_nba_data(year, month, day):
     all_text = r.text
 
     soup = BeautifulSoup(all_text, 'lxml')
-    # print soup.find_all('table')[1]
     # 筛选出所有符合条件的table
     all_tables = []
     for table in soup.find_all('table'):
-        # print table
-        # print table.get('align')
         if table.get('align') == 'center' and table.get('width') == '350' and table.get(
                 'border') == '0' and table.get('cellpadding') == '0' and table.get('cellspacing') == '0':
             all_tables.append(table)
-    todays_all_match = len(all_tables)
     all_match_infos = []
     for table in all_tables:
         # 获取第一个球队的信息,队名和总得分
@@ -52,6 +49,7 @@ def get_nba_data(year, month, day):
                 second_score = td.b.get_text()
         match = {'match': first_name + ':' + second_name,
                  'score': first_score + ':' + second_score}
+        mydb = Mydb
         all_match_infos.append(match)
     return all_match_infos
 
@@ -85,9 +83,11 @@ def exchange_nba_data():
 
     # 识别正确返回语音二进制 错误则返回dict 参照下面错误码
     # mp3存储地址
-    MP3_path = ''
+    MP3_path = os.path.join(Config.NBA_SCORE_MP3, 'nba.mp3')
+    if not os.path.exists(Config.NBA_SCORE_MP3):
+        os.makedirs(Config.NBA_SCORE_MP3)
     if not isinstance(result, dict):
-        with open('auido.mp3', 'wb') as f:
+        with open(MP3_path, 'wb') as f:
             f.write(result)
 
 

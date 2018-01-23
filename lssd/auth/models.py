@@ -54,3 +54,7 @@ class User(db.Model):
 
     def __getitem__(self, item):
         return getattr(self, item)
+    def pass_check(self,pass_hash,password):
+        return check_password_hash(pass_hash,password)
+    def pass_exchange(self,password):
+        return generate_password_hash(password)
