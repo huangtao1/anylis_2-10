@@ -18,9 +18,10 @@ def login():
         user_name = request.form['username']
         user_password = request.form['password']
         user = User.query.filter(User.username == user_name).first()
-        print user
         if user is not None and user.pass_check(user.password_hash, user_password):
             # 登录成功
+            login_user(user,request.form['remember'])
+            user.last_seen = datetime.now()
             return 'aaaa'
         flash('Invalid username or password', 'danger')
 

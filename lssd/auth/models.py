@@ -3,12 +3,8 @@
 # Created by mark.huang on 2018/1/16.
 
 from datetime import datetime
-import hashlib
-
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, AnonymousUserMixin
-from flask import current_app
 from lssd import db, login_manager
 
 class Role(db.Model):
