@@ -51,3 +51,4 @@ def add_user():
         db.session.add(user)
         db.session.commit
         flash('Add user successful', 'success')
+    return render_template('auth/regist.html')

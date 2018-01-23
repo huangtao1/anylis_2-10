@@ -1,14 +1,17 @@
-<html>
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
 <head>
-    <meta charset="utf-8"/>
-    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <title>LSSD|{% block title %}{% endblock %}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
-    {% block header %}
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+    {% block head %}
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+              type="text/css">
         <link href="{{ url_for('static', filename='assets/global/plugins/font-awesome/css/font-awesome.min.css') }}"
               rel="stylesheet" type="text/css">
         <link href="{{ url_for('static', filename='assets/global/plugins/simple-line-icons/simple-line-icons.min.css') }}"
@@ -17,92 +20,235 @@
               rel="stylesheet" type="text/css">
         <link href="{{ url_for('static', filename='assets/global/plugins/uniform/css/uniform.default.css') }}"
               rel="stylesheet" type="text/css">
-        <link href="{{ url_for('static', filename='assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}"
-              rel="stylesheet" type="text/css"/>
         <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+        <link href="{{ url_for('static', filename='assets/global/plugins/jqvmap/jqvmap/jqvmap.css') }}" rel="stylesheet"
+              type="text/css">
+        <link href="{{ url_for('static', filename='assets/global/plugins/morris/morris.css') }}" rel="stylesheet"
+              type="text/css">
+        <!-- END PAGE LEVEL PLUGIN STYLES -->
+        <!-- BEGIN PAGE STYLES -->
+        <link href="{{ url_for('static', filename='assets/admin/pages/css/tasks.css') }}" rel="stylesheet"
+              type="text/css"/>
+        <!-- END PAGE STYLES -->
         <!-- BEGIN THEME STYLES -->
-        <link href="{{ url_for('static', filename='assets/global/css/components-md.css') }}" id="style_components"
-              rel="stylesheet" type="text/css"/>
-        <link href="{{ url_for('static', filename='assets/global/css/plugins-md.css') }}" rel="stylesheet"
-              type="text/css"/>
-        <link href="{{ url_for('static', filename='assets/admin/layout4/css/layout.css') }}" rel="stylesheet"
-              type="text/css"/>
-        <link href="{{ url_for('static', filename='assets/admin/layout4/css/themes/light.css') }}" id="style_color"
-              rel="stylesheet" type="text/css"/>
-        <link href="{{ url_for('static', filename='assets/admin/layout/css/custom.css') }}" rel="stylesheet"
-              type="text/css"/>
+        <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+        <link href="{{ url_for('static', filename='assets/global/css/components-rounded.css') }}" id="style_components"
+              rel="stylesheet" type="text/css">
+        <link href="{{ url_for('static', filename='assets/global/css/plugins.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ url_for('static', filename='assets/admin/layout3/css/layout.css') }}" rel="stylesheet"
+              type="text/css">
+        <link href="{{ url_for('static', filename='assets/admin/layout3/css/themes/default.css') }}" rel="stylesheet"
+              type="text/css" id="style_color">
+        <link href="{{ url_for('static', filename='assets/admin/layout3/css/custom.css') }}" rel="stylesheet"
+              type="text/css">
         <!-- END THEME STYLES -->
         <link rel="shortcut icon" href="{{ url_for('static', filename='website/favicon.ico') }}">
+
     {% endblock %}
 </head>
-<body>
-{% block body %}
+<!-- END HEAD -->
 
-    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-    <!-- BEGIN CORE PLUGINS -->
-    <!--[if lt IE 9]>
+<body>
+<!-- BEGIN HEADER -->
+<div class="page-header">
+    <!-- BEGIN HEADER TOP -->
+    <div class="page-header-top">
+        <div class="container">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a><img src="{{ url_for('static',filename='assets/admin/layout3/img/logo-default.png') }}" alt="logo"
+                        class="logo-default"></a>
+            </div>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="menu-toggler"></a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="droddown dropdown-separator">
+                        <span class="separator"></span>
+                    </li>
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <li class="dropdown dropdown-user dropdown-dark">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                           data-close-others="true">
+                            <img alt="" class="img-circle"
+                                 src="{{ url_for('static',filename='assets/admin/layout3/img/avatar9.jpg') }}">
+                            <span class="username username-hide-mobile">Nick</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                                <a href="extra_profile.html">
+                                    <i class="icon-user"></i> My Profile </a>
+                            </li>
+                            <li>
+                                <a href="page_calendar.html">
+                                    <i class="icon-calendar"></i> My Calendar </a>
+                            </li>
+                            <li>
+                                <a href="inbox.html">
+                                    <i class="icon-envelope-open"></i> My Inbox <span class="badge badge-danger">
+                                3 </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="icon-rocket"></i> My Tasks <span class="badge badge-success">
+                                7 </span>
+                                </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="extra_lock.html">
+                                    <i class="icon-lock"></i> Lock Screen </a>
+                            </li>
+                            <li>
+                                <a href="login.html">
+                                    <i class="icon-key"></i> Log Out </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <li class="dropdown dropdown-extended quick-sidebar-toggler">
+                        <span class="sr-only">Toggle Quick Sidebar</span>
+                        <i class="icon-logout"></i>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>
+    <!-- END HEADER TOP -->
+    <!-- BEGIN HEADER MENU -->
+    <div class="page-header-menu">
+        <div class="container">
+            <!-- BEGIN MEGA MENU -->
+            <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+            <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
+            <div class="hor-menu ">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="index.html">Dashboard</a>
+                    </li>
+                    <li class="menu-dropdown mega-menu-dropdown ">
+                        <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown"
+                           href="javascript:;" class="dropdown-toggle">
+                            Features <i class="fa fa-angle-down"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- END MEGA MENU -->
+        </div>
+    </div>
+    <!-- END HEADER MENU -->
+</div>
+<!-- END HEADER -->
+<!-- BEGIN PAGE CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN PAGE HEAD -->
+    <div class="page-head">
+        <div class="container">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                {% block page_title %}{% endblock %}
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+    </div>
+    <!-- END PAGE HEAD -->
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content">
+        <div class="container">
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="#">Home</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Dashboard
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block page_content %}{% endblock %}
+    </div>
+</div>
+<!-- END PAGE CONTAINER -->
+<!-- BEGIN FOOTER -->
+<div class="page-footer">
+    <div class="container">
+        2018 &copy; Lssd by Mark.
+    </div>
+</div>
+<div class="scroll-to-top">
+    <i class="icon-arrow-up"></i>
+</div>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
 <script src="{{ url_for('static', filename='assets/global/plugins/respond.min.js')}}"></script>
 <script src="{{ url_for('static', filename='assets/global/plugins/excanvas.min.js')}}"></script>
 <![endif]-->
-    <script src="{{ url_for('static', filename='assets/global/plugins/jquery.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='assets/global/plugins/jquery-migrate.min.js') }}"
-            type="text/javascript"></script>
-    <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-    <script src="{{ url_for('static', filename='assets/global/plugins/jquery-ui/jquery-ui.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='assets/global/plugins/bootstrap/js/bootstrap.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='assets/global/plugins/jquery.blockui.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='assets/global/plugins/jquery.cokie.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='assets/global/plugins/uniform/jquery.uniform.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"
-            type="text/javascript"></script>
-    <!-- END CORE PLUGINS -->
-    <script src="{{ url_for('static', filename='assets/global/scripts/metronic.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='assets/admin/layout4/scripts/layout.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='assets/admin/layout4/scripts/demo.js') }}"
-            type="text/javascript"></script>
-    <script>
-        jQuery(document).ready(function () {
-            Metronic.init(); // init metronic core components
-            Layout.init(); // init current layout
-            Demo.init(); // init demo features
-        });
-        function showMask() {
-            $.blockUI({message: '<h2><img src="/static/images/ajax-loader.gif" >&nbsp&nbspJust a moment...</h2>'});
-        }
-        function unshowMask() {
-            $.unblockUI();
-        }
-        // 去除字符串首尾空格
-        function trimStr(str) {
-            return str.replace(/(^\s*)|(\s*$)/g, "");
-        }
+<script src="{{ url_for('static', filename='assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/global/plugins/jquery-migrate.min.js') }}"
+        type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="{{ url_for('static', filename='assets/global/plugins/jquery-ui/jquery-ui.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/global/plugins/bootstrap/js/bootstrap.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/global/plugins/jquery.blockui.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/global/plugins/jquery.cokie.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/global/plugins/uniform/jquery.uniform.min.js') }}"
+        type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
 
-        //判断当前字符串是否以str开始 先判断是否存在function是避免和js原生方法冲突，自定义方法的效率不如原生的高
-        if (typeof String.prototype.startsWith != 'function') {
-            String.prototype.startsWith = function (str) {
-                return this.slice(0, str.length) == str;
-            };
-        }
-
-        //判断当前字符串是否以str结束
-        if (typeof String.prototype.endsWith != 'function') {
-            String.prototype.endsWith = function (str) {
-                return this.slice(-str.length) == str;
-            };
-        }
-    </script>
-    <!-- END JAVASCRIPTS -->
-{% endblock %}
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{{ url_for('static', filename='assets/global/scripts/metronic.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/admin/layout3/scripts/layout.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/admin/layout2/scripts/quick-sidebar.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/admin/layout3/scripts/demo.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/admin/pages/scripts/index3.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='assets/admin/pages/scripts/tasks.js') }}" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+    jQuery(document).ready(function () {
+        Metronic.init(); // init metronic core componets
+        Layout.init(); // init layout
+        Demo.init(); // init demo(theme settings page)
+        QuickSidebar.init(); // init quick sidebar
+    });
+</script>
+<!-- END JAVASCRIPTS -->
 </body>
+<!-- END BODY -->
 </html>
