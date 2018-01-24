@@ -75,8 +75,8 @@
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                            data-close-others="true">
                             <img alt="" class="img-circle"
-                                 src="{{ url_for('static',filename='assets/admin/layout3/img/avatar9.jpg') }}">
-                            <span class="username username-hide-mobile">Nick</span>
+                                 src="{{ url_for('static',filename='assets/admin/layout3/img/avatar10.jpg') }}">
+                            <span class="username username-hide-mobile">{{ session['user'].display_name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
@@ -106,16 +106,10 @@
                                     <i class="icon-lock"></i> Lock Screen </a>
                             </li>
                             <li>
-                                <a href="login.html">
+                                <a href="{{ url_for('auth.logout') }}">
                                     <i class="icon-key"></i> Log Out </a>
                             </li>
                         </ul>
-                    </li>
-                    <!-- END USER LOGIN DROPDOWN -->
-                    <!-- BEGIN USER LOGIN DROPDOWN -->
-                    <li class="dropdown dropdown-extended quick-sidebar-toggler">
-                        <span class="sr-only">Toggle Quick Sidebar</span>
-                        <i class="icon-logout"></i>
                     </li>
                     <!-- END USER LOGIN DROPDOWN -->
                 </ul>

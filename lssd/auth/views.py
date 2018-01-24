@@ -20,11 +20,13 @@ def login():
         user = User.query.filter(User.username == user_name).first()
         if user is not None and user.pass_check(user.password_hash, user_password):
             # 登录成功
-            print request.form
             login_user(user, request.form['remember'])
             user.last_seen = datetime.now()
             db.session.add(user)
             db.session.commit
+            # 添加session
+            session['user'] = {'username': user.username, 'display_name': user.display_name, 'email': user.email,
+                               'role': user.role.name}
             return redirect(request.args.get('next') or url_for('auth.add_user'))
         flash('Invalid username or password', 'danger')
 
@@ -55,3 +57,11 @@ def add_user():
         db.session.commit
         flash('Add user successful', 'success')
     return render_template('auth/regist.html')
+
+
+@auth.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    flash('You have loged out successful', 'success')
+    return redirect(url_for('auth.login'))
