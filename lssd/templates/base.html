@@ -169,6 +169,7 @@
                 </li>
             </ul>
             <!-- END PAGE BREADCRUMB -->
+            {% block page_content %}{% endblock %}
         </div>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -182,7 +183,6 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        {% block page_content %}{% endblock %}
     </div>
 </div>
 <!-- END PAGE CONTAINER -->
@@ -228,8 +228,6 @@
 <script src="{{ url_for('static', filename='assets/global/scripts/metronic.js') }}" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='assets/admin/layout3/scripts/layout.js') }}"
         type="text/javascript"></script>
-<script src="{{ url_for('static', filename='assets/admin/layout2/scripts/quick-sidebar.js') }}"
-        type="text/javascript"></script>
 <script src="{{ url_for('static', filename='assets/admin/layout3/scripts/demo.js') }}" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='assets/admin/pages/scripts/index3.js') }}" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='assets/admin/pages/scripts/tasks.js') }}" type="text/javascript"></script>
@@ -239,7 +237,6 @@
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         Demo.init(); // init demo(theme settings page)
-        QuickSidebar.init(); // init quick sidebar
     });
 </script>
 <!-- END JAVASCRIPTS -->
