@@ -6,6 +6,8 @@ from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
 from lssd import db, login_manager
+from flask_login import UserMixin
+
 
 class Role(db.Model):
     """角色"""
@@ -26,7 +28,7 @@ class Role(db.Model):
         return getattr(self, item)
 
 
-class User(db.Model):
+class User(UserMixin,db.Model):
     """用户"""
 
     __tablename__ = 'lssd_user'
@@ -42,7 +44,7 @@ class User(db.Model):
     location = db.Column(db.String(64))
     member_since = db.Column(db.DateTime(), default=datetime.now())
     last_seen = db.Column(db.DateTime(), default=datetime.now())
-    activate = db.Column(db.Boolean, default=True)
+    active = db.Column(db.Boolean, default=True)
     real_avatar =db.Column(db.String(128))
 
     def __repr__(self):
@@ -54,3 +56,8 @@ class User(db.Model):
         return check_password_hash(pass_hash,password)
     def pass_exchange(self,password):
         return generate_password_hash(password)
+
+#登录必须要加载此装饰器
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))

@@ -20,9 +20,12 @@ def login():
         user = User.query.filter(User.username == user_name).first()
         if user is not None and user.pass_check(user.password_hash, user_password):
             # 登录成功
-            login_user(user,request.form['remember'])
+            print request.form
+            login_user(user, request.form['remember'])
             user.last_seen = datetime.now()
-            return 'aaaa'
+            db.session.add(user)
+            db.session.commit
+            return redirect(request.args.get('next') or url_for('auth.add_user'))
         flash('Invalid username or password', 'danger')
 
     return render_template('auth/login.html')
