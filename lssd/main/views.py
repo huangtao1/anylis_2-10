@@ -10,3 +10,15 @@ from flask_login import login_user, logout_user, login_required, current_user
 @login_required
 def home_index():
     return redirect(url_for('auth.add_user'))
+
+@main.route('/admin_home')
+@login_required
+def admin_home():
+    return render_template('main/admin.html')
+
+
+@main.route('/user_home')
+@login_required
+def user_home():
+    return render_template('main/user.html')
+

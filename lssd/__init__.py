@@ -33,7 +33,7 @@ def create_app(config_name):
     from lssd.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint,url_prefix='/auth')
     #新浪NBA
-    from lssd.sina import sina as sina_blueprint
-    app.register_blueprint(sina_blueprint,url_prefix='/sina')
+    from lssd.nba import nba as nba_blueprint
+    app.register_blueprint(nba_blueprint,url_prefix='/nba')
     return app
 

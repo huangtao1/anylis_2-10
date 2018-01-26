@@ -16,10 +16,9 @@ class Role(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
-    default = db.Column(db.Boolean, default=False, index=True)
-    permission = db.Column(db.Integer)
-    index_page = db.Column(db.String(64))
-    menu = db.Column(db.String(200))
+    index_menu_id = db.Column(db.Integer,db.ForeignKey('lssd_menu.id'))
+    index_menu = db.relationship('Menu',backref=db.backref('role'))
+    menus = db.Column(db.String(200))
 
     def __repr__(self):
         return '<Role %r>' % self.name
@@ -28,36 +27,47 @@ class Role(db.Model):
         return getattr(self, item)
 
 
-class User(UserMixin,db.Model):
+class User(UserMixin, db.Model):
     """用户"""
 
     __tablename__ = 'lssd_user'
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
-    username = db.Column(db.String(64), unique=True, index=True)
+    username = db.Column(db.String(128), unique=True, index=True)
     display_name = db.Column(db.String(64), nullable=True)
     role_id = db.Column(db.Integer, db.ForeignKey('lssd_role.id'))
     role = db.relationship('Role', backref=db.backref('user', order_by=id))
     password_hash = db.Column(db.String(128))
-    confirmed = db.Column(db.Boolean, default=False)
     location = db.Column(db.String(64))
     member_since = db.Column(db.DateTime(), default=datetime.now())
     last_seen = db.Column(db.DateTime(), default=datetime.now())
     active = db.Column(db.Boolean, default=True)
-    real_avatar =db.Column(db.String(128))
+    real_avatar = db.Column(db.String(128))
 
     def __repr__(self):
         return '<User %r>' % self.username
 
     def __getitem__(self, item):
         return getattr(self, item)
-    def pass_check(self,pass_hash,password):
-        return check_password_hash(pass_hash,password)
-    def pass_exchange(self,password):
+
+    def pass_check(self, pass_hash, password):
+        return check_password_hash(pass_hash, password)
+
+    def pass_exchange(self, password):
         return generate_password_hash(password)
 
-#登录必须要加载此装饰器
+
+# 登录必须要加载此装饰器
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+class Menu(db.Model):
+    """菜单"""
+    __tablename__ = 'lssd_menu'
+
+    id = db.Column(db.Integer, primary_key=True)
+    menu_url = db.Column(db.String(64), unique=True)
+    menu_desc = db.Column(db.String(64))

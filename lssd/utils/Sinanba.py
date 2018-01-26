@@ -9,6 +9,7 @@ from aip import AipSpeech
 from config import Config
 import os
 from Mydb import Mydb
+import json
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -49,8 +50,21 @@ def get_nba_data(year, month, day):
                 second_score = td.b.get_text()
         match = {'match': first_name + ':' + second_name,
                  'score': first_score + ':' + second_score}
-        mydb = Mydb
         all_match_infos.append(match)
+    all_info = json.dumps(all_match_infos)
+    mydb = Mydb(host='104.156.251.60', user_name='root', password='huangtao123689', db_name='lssd')
+    # 查询是否有记录,有就更新,没有就添加
+    search_sql = "SELECT * FROM lssd_nba_daily WHERE competing_time='{0}'".format('-'.join([year, month, day]))
+    if mydb.serach_info(search_sql, count='one'):
+        update_sql = "UPDATE lssd_nba_daily SET today_content='{0}' WHERE competing_time='{1}'".format(all_info,
+                                                                                                       '-'.join(
+                                                                                                           [year, month,
+                                                                                                            day]))
+        mydb.update_data(update_sql)
+    else:
+        insert_sql = "INSERT INTO lssd_nba_daily(competing_time,today_content) VALUES('{0}','{1}')".format(
+            '-'.join([year, month, day]), all_info)
+        mydb.insert_data(insert_sql)
     return all_match_infos
 
 

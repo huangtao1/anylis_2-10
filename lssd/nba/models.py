@@ -8,13 +8,10 @@ class Nbadaily(db.Model):
     """
     每天nba比赛结果存储
     """
-    __tablename__ = 'lssd_hupunba_daily'
+    __tablename__ = 'lssd_nba_daily'
     id = db.Column(db.Integer, primary_key=True)
-    master_team = db.Column(db.String(64))
-    visit_team = db.Column(db.String(64))
-    master_score = db.Column(db.String(64))
-    visit_score = db.Column(db.String(64))
-    competing_time = db.Column(db.Date)
+    today_content = db.Column(db.Text)
+    competing_time = db.Column(db.Date,unique=True)
 
     def __repr__(self):
         return 'NBADaily_report:{0}'.format(self.competing_time)
