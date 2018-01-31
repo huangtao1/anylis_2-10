@@ -28,6 +28,7 @@ def login():
             # 添加session
             session['user'] = {'username': user.username, 'display_name': user.display_name, 'email': user.email,
                                'role': user.role.name}
+            session['index_page'] = user.role.index_menu.menu_url
             return redirect(request.args.get('next') or url_for(user.role.index_menu.menu_url))
         flash('Invalid username or password', 'danger')
 
@@ -71,3 +72,20 @@ def logout():
     logout_user()
     flash('You have loged out successful', 'success')
     return redirect(url_for('auth.login'))
+
+
+@auth.route('/lock_screen', methods=['GET', 'POST'])
+@login_required
+def lock_screen():
+    """
+    锁屏
+    :return:
+    """
+    # 登录解锁
+    if request.method == 'POST':
+        user_password = request.form['password']
+        if current_user.pass_check(current_user.password_hash, user_password):
+            return redirect(url_for(current_user.role.index_menu.menu_url))
+        else:
+            flash('Wrong Password!!', 'danger')
+    return render_template('auth/lock.html')

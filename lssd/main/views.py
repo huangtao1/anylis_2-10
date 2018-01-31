@@ -9,7 +9,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 @main.route('/')
 @login_required
 def home_index():
-    return redirect(url_for('auth.add_user'))
+    return redirect(url_for(current_user.role.index_menu.menu_url))
 
 @main.route('/admin_home')
 @login_required

@@ -18,3 +18,4 @@ def nbadaily():
     all_matches = get_nba_data()
     # 获取今天的十条新闻展示
     all_news = Dailynews.query.filter(Dailynews.today_date == today_date).all()
+

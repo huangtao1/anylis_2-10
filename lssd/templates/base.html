@@ -86,7 +86,7 @@
                             <li class="divider">
                             </li>
                             <li>
-                                <a href="extra_lock.html">
+                                <a href="{{ url_for('auth.lock_screen') }}">
                                     <i class="icon-lock"></i> Lock Screen </a>
                             </li>
                             <li>
@@ -111,13 +111,37 @@
             <div class="hor-menu ">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="">Dashboard</a>
+                        <a href="{{ url_for(session['index_page']) }}">Dashboard</a>
                     </li>
-                    <li class="menu-dropdown mega-menu-dropdown ">
+                    <li class="menu-dropdown classic-menu-dropdown ">
                         <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown"
-                           href="javascript:;" class="dropdown-toggle">
-                            Features <i class="fa fa-angle-down"></i>
+                           href="javascript:;">
+                            ALL <i class="fa fa-angle-down"></i>
                         </a>
+                        <ul class="dropdown-menu pull-left">
+                            <li class=" dropdown-submenu">
+                                <a href=":;">
+                                    <i class="icon-briefcase"></i>
+                                    ALL NEWS </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="">
+                                            Basic Datatables </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class=" dropdown-submenu">
+                                <a href=":;">
+                                    <i class="icon-wallet"></i>
+                                    Others </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="">
+                                            General Portlets </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
