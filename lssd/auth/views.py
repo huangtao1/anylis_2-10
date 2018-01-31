@@ -27,7 +27,7 @@ def login():
             db.session.commit()
             # 添加session
             session['user'] = {'username': user.username, 'display_name': user.display_name, 'email': user.email,
-                               'role': user.role.name}
+                               'role': user.role.name, 'id': user.id}
             session['index_page'] = user.role.index_menu.menu_url
             return redirect(request.args.get('next') or url_for(user.role.index_menu.menu_url))
         flash('Invalid username or password', 'danger')
@@ -89,3 +89,31 @@ def lock_screen():
         else:
             flash('Wrong Password!!', 'danger')
     return render_template('auth/lock.html')
+
+
+@auth.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    """
+    个人资料
+    :return:
+    """
+    return redirect(url_for('auth.edit_account', user_id=session.get('user').get('id')))
+
+
+@auth.route('/edit_account/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def edit_account(user_id):
+    """
+
+    :param user_id:
+    :return:
+    """
+    user = User.query.filter(User.id == user_id).first()
+    if request.method == 'POST':
+        user.display_name = request.form['nickname']
+        session['user']['display_name'] = user.display_name
+        db.session.add(user)
+        db.session.commit()
+        flash('Update successfully!!', 'success')
+    return render_template('auth/profile.html', user=user)
