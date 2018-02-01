@@ -17,7 +17,8 @@
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                                <input type="text" id="username" name="username" class="form-control" readonly value="{{ user.username }}">
+                                <input type="text" id="username" name="username" class="form-control" readonly
+                                       value="{{ user.username }}">
                             </div>
                         </div>
                     </div>
@@ -28,7 +29,8 @@
                             <span class="input-group-addon">
                                 <i class="icon-eyeglasses"></i>
                             </span>
-                                <input type="text" id="nickname" name="nickname" class="form-control" required value="{{ user.display_name }}">
+                                <input type="text" id="nickname" name="nickname" class="form-control" required
+                                       value="{{ user.display_name }}">
                             </div>
                         </div>
 
@@ -40,7 +42,8 @@
                             <span class="input-group-addon">
                                 <i class="icon-speech"></i>
                             </span>
-                                <input type="password" id="password" name="password" class="form-control" required value="{{ user.password_hash }}">
+                                <input type="password" id="password" name="password" class="form-control" required
+                                       value="{{ user.password_hash }}">
                             </div>
                         </div>
 
@@ -52,7 +55,8 @@
                             <span class="input-group-addon">
                                 <i class="icon-direction"></i>
                             </span>
-                                <input type="text" id="email" name="email" class="form-control" required value="{{ user.email }}">
+                                <input type="text" id="email" name="email" class="form-control" required
+                                       value="{{ user.email }}">
                             </div>
                         </div>
 
@@ -64,19 +68,24 @@
                             <span class="input-group-addon">
                                 <i class="icon-compass"></i>
                             </span>
-                                <input type="text" id="location" name="location" class="form-control" required value="{{ user.location }}">
+                                <input type="text" id="location" name="location" class="form-control" required
+                                       value="{{ user.location }}">
                             </div>
                         </div>
 
                     </div>
-                    <div class="form-actions right">
-                        <div class="row">
-                            <div class="col-md-offset-4 col-md-8">
-                                <button type="submit" class="btn btn-circle btn-success"><i class="glyphicon glyphicon-ok"></i> 提交</button>
-                                <a type="button" class="btn btn-circle btn-danger" href="">取消</a>
+                    {% if session['user'].id == user.id %}
+                        <div class="form-actions right">
+                            <div class="row">
+                                <div class="col-md-offset-4 col-md-8">
+                                    <button type="submit" class="btn btn-circle btn-success"><i
+                                            class="glyphicon glyphicon-ok"></i> 提交
+                                    </button>
+                                    <a type="button" class="btn btn-circle btn-danger" href="">取消</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                 </form>
             </div>
         </div>

@@ -75,7 +75,7 @@
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                            data-close-others="true">
                             <img alt="" class="img-circle"
-                                 src="{{ url_for('static',filename='assets/admin/layout3/img/avatar10.jpg') }}">
+                                 src="{{ session['user'].avatar }}">
                             <span class="username username-hide-mobile">{{ session['user'].display_name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">

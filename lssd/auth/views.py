@@ -27,7 +27,7 @@ def login():
             db.session.commit()
             # 添加session
             session['user'] = {'username': user.username, 'display_name': user.display_name, 'email': user.email,
-                               'role': user.role.name, 'id': user.id}
+                               'role': user.role.name, 'id': user.id,'avatar':user.gravatar()}
             session['index_page'] = user.role.index_menu.menu_url
             return redirect(request.args.get('next') or url_for(user.role.index_menu.menu_url))
         flash('Invalid username or password', 'danger')

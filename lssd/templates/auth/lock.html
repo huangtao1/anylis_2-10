@@ -68,7 +68,7 @@
                 {% endif %}
             {% endwith %}
             <div class="pull-left lock-avatar-block">
-                <img src="{{ url_for('static', filename='assets/admin/pages/media/profile/photo3.jpg') }}"
+                <img src="{{ session['user'].avatar }}"
                      class="lock-avatar">
             </div>
             <form class="lock-form pull-left" action="" method="post">

@@ -7,6 +7,8 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
 from lssd import db, login_manager
 from flask_login import UserMixin
+import hashlib
+from flask import request
 
 
 class Role(db.Model):
@@ -16,8 +18,8 @@ class Role(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
-    index_menu_id = db.Column(db.Integer,db.ForeignKey('lssd_menu.id'))
-    index_menu = db.relationship('Menu',backref=db.backref('role'))
+    index_menu_id = db.Column(db.Integer, db.ForeignKey('lssd_menu.id'))
+    index_menu = db.relationship('Menu', backref=db.backref('role'))
     menus = db.Column(db.String(200))
 
     def __repr__(self):
@@ -57,6 +59,20 @@ class User(UserMixin, db.Model):
     def pass_exchange(self, password):
         return generate_password_hash(password)
 
+    def get_mail_hash(self):
+        self.real_avatar = hashlib.md5(self.email.encode('utf-8')).hexdigest()
+
+    def gravatar(self, size=100, default='identicon', rating='g'):
+        if request.is_secure:
+            url = 'https://secure.gravatar.com/avatar'
+
+        else:
+            url = 'http://www.gravatar.com/avatar'
+            hash = self.real_avatar or hashlib.md5(
+                self.email.encode('utf-8')).hexdigest()
+        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+            url=url, hash=hash, size=size, default=default, rating=rating)
+
 
 # 登录必须要加载此装饰器
 @login_manager.user_loader
@@ -71,3 +87,5 @@ class Menu(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     menu_url = db.Column(db.String(64), unique=True)
     menu_desc = db.Column(db.String(64))
+    parent_id = db.Column(db.Integer, db.ForeignKey('lssd_menu.id'),nullable=True)
+    parent = db.relationship('Menu', uselist=False, remote_side=[id],backref=db.backref('children', order_by=id))
