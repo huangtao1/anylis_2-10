@@ -6,16 +6,20 @@ from flask import render_template, redirect, url_for, request, current_app
 from flask_login import login_required
 from datetime import datetime
 from models import Nbadaily, Dailynews
-from ..utils.Sinanba import get_nba_data
+from ..utils.Sinanba import exchange_nba_data
+import json
 
 
-@nba.route('nbadaily', methods=['GET', 'POST'])
+@nba.route('/nbadaily', methods=['GET', 'POST'])
 @login_required
 def nbadaily():
-    # 获取今天是几号
-    today_date = ''
-    # 获取今天所有的比分
-    all_matches = get_nba_data()
-    # 获取今天的十条新闻展示
-    all_news = Dailynews.query.filter(Dailynews.today_date == today_date).all()
-
+    """
+    可能会存在加载慢,为了保证每次都是新的数据需要刷新
+    :return:
+    """
+    exchange_nba_data()
+    # 获取数据加载到页面
+    today_data = Nbadaily.query.filter(Nbadaily.competing_time == datetime.now().strftime('%Y-%m-%d')).first()
+    # print datetime.now().strftime('%Y-%m-%d')
+    # [{"score": "102:104", "match": "u7070u718a:u6d3bu585e"}
+    return render_template('nba/nbadaily.html', all_match=json.loads(today_data.today_content))

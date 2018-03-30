@@ -3,7 +3,7 @@
 # Created by mark.huang on 2018/1/15.
 from . import auth
 from flask import render_template, redirect, url_for, request, current_app, flash, session
-from models import User
+from models import User, Menu
 from datetime import datetime
 from flask_login import login_user, logout_user, login_required, current_user
 from lssd import db
@@ -25,9 +25,25 @@ def login():
             user.last_seen = datetime.now()
             db.session.add(user)
             db.session.commit()
+            '''
+            # 处理menu
+            # {'parent_name':,'children':[{'name':,'url':}]}
+            # 获取所有的menu,id
+            all_menu = user.menu.split(',')
+            menu_info = []
+            parent_menus = [menu.id for menu in Menu.query.filter(Menu.is_parent == True).all()]
+            print parent_menus
+            for menu_id in all_menu:
+                info = {}
+                # 判断是否是父级菜单
+                if menu_id in parent_menus:
+                    p_menu = Menu.query.filter(Menu.id == menu_id).first()
+                    info['parent_name'] = p_menu.desc
+                # 处理子菜单
+            '''
             # 添加session
             session['user'] = {'username': user.username, 'display_name': user.display_name, 'email': user.email,
-                               'role': user.role.name, 'id': user.id,'avatar':user.gravatar()}
+                               'role': user.role.name, 'id': user.id, 'avatar': user.gravatar()}
             session['index_page'] = user.role.index_menu.menu_url
             return redirect(request.args.get('next') or url_for(user.role.index_menu.menu_url))
         flash('Invalid username or password', 'danger')

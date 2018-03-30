@@ -46,6 +46,7 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime(), default=datetime.now())
     active = db.Column(db.Boolean, default=True)
     real_avatar = db.Column(db.String(128))
+    menu = db.Column(db.String(128))
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -87,5 +88,5 @@ class Menu(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     menu_url = db.Column(db.String(64), unique=True)
     menu_desc = db.Column(db.String(64))
-    parent_id = db.Column(db.Integer, db.ForeignKey('lssd_menu.id'),nullable=True)
-    parent = db.relationship('Menu', uselist=False, remote_side=[id],backref=db.backref('children', order_by=id))
+    parent_id = db.Column(db.Integer,nullable=True)
+    is_parent = db.Column(db.Boolean,default=False)

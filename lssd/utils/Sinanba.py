@@ -22,7 +22,7 @@ def get_nba_data(year, month, day):
         'http://nba.sports.sina.com.cn/live.php?years={0}&months={1}&days={2}&Submit=%B2%E9%D1%AF'.format(year, month,
                                                                                                           day),
         headers=header)
-    r.encoding = 'gbk'
+    r.encoding = 'gb2312'
     all_text = r.text
 
     soup = BeautifulSoup(all_text, 'lxml')
@@ -39,6 +39,7 @@ def get_nba_data(year, month, day):
         for td in tr1.find_all('td'):
             if td.get('height') == '20' and td.get('style') == 'padding-left:10px':
                 first_name = td.get_text()
+                print first_name
             if td.b:
                 first_score = td.b.get_text()
         # 获取第二个球队的信息,队名和总得分
@@ -52,6 +53,8 @@ def get_nba_data(year, month, day):
                  'score': first_score + ':' + second_score}
         all_match_infos.append(match)
     all_info = json.dumps(all_match_infos)
+    print all_match_infos
+    print all_info
     mydb = Mydb(host='104.156.251.60', user_name='root', password='huangtao123689', db_name='lssd')
     # 查询是否有记录,有就更新,没有就添加
     search_sql = "SELECT * FROM lssd_nba_daily WHERE competing_time='{0}'".format('-'.join([year, month, day]))

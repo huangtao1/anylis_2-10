@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}
+    NBADaily
+{% endblock %}
+{% block page_content %}
+    <div class="row col-md-8">
+    {% for match in all_match %}
+        <input readonly value="{{ match['match'].split(':')[0]+'=='+match['score'].split(':')[0] }}">
+        <input readonly value="{{ match['match'].split(':')[1]+'=='+match['score'].split(':')[1] }}">
+    {% endfor %}
+    </div>
+    <div class="col-md-12">
+        <div class="fa-item " onclick="play_music()">
+            <i class="fa fa-music"></i> NBA
+        </div>
+        <audio id="bgMusic">
+            <source src="{{ url_for('static',filename='NBA/nba.mp3') }}" type="audio/mp3">
+        </audio>
+    </div>
+    <script src="{{ url_for('static', filename='js/auth/login.js') }}"
+            type="text/javascript"></script>
+{% endblock %}
